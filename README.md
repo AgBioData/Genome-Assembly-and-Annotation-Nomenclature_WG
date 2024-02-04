@@ -54,3 +54,24 @@ poetry run gaan create-assembly --help
 
 ### Examples
 For more examples, refer to the usage section above.
+
+## Using Docker (Optional)
+
+If you prefer to use Docker, you can build a Docker image locally. Ensure you have Docker installed on your machine.
+
+```bash
+# Build the Docker image
+docker build -t gaan-tool .
+
+# Run the GAAN tool inside a Docker container
+docker run -it gaan-tool [command and arguments]
+```
+
+Replace [command and arguments] with the actual GAAN command and its arguments. 
+
+### For example:
+
+```bash
+docker run -it gaan-tool create-assembly ABC123 Sample1 ProjectX 1 0
+```
+Note: The Docker image is built locally and not pushed to a container registry. This approach is suitable for local usage.
