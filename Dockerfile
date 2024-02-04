@@ -4,17 +4,14 @@ FROM python:3.8-slim
 # Set the working directory to /app
 WORKDIR /app
 
-# Copy the current directory contents into the container at /app
+# Copy just the poetry files (to leverage caching)
+COPY poetry.lock pyproject.toml /app/
+
+# Install dependencies using Poetry
+RUN pip install poetry && poetry config virtualenvs.create false && poetry install --no-dev
+
+# Copy the rest of the application code
 COPY . /app
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
-# Define environment variable
-ENV NAME World
-
-# Run app.py when the container launches
-CMD ["python", "gaan/gaan.py"]
+# Run the command-line tool when the container launches
+CMD ["poetry", "run", "gaan"]
