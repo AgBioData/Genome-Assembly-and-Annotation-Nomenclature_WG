@@ -8,80 +8,49 @@ This command-line tool facilitates the creation and validation of genome assembl
 
 ## Installation
 
-1. Clone the repository:
+To use GAAN, you need to install its dependencies. We recommend using Poetry for managing the project dependencies.
 
-   ```bash
-   git clone https://github.com/AgBioData/Genome-Assembly-and-Annotation-Nomenclature_WG.git
-   ```
+### Poetry Installation
 
-### Navigate to the tool's directory:
+If you don't have Poetry installed, you can do so by following the instructions on the [official Poetry website](https://python-poetry.org/docs/#installation).
 
-```bash
-cd Genome-Assembly-and-Annotation-Nomenclature_WG/lib/gaan
-```
-## Run the tool using Python:
+### Install Dependencies
+
+Once Poetry is installed, navigate to the project directory and run the following command to install the dependencies:
 
 ```bash
-python gaan.py [command] [options]
+poetry install
+```
+Usage
+GAAN provides command-line functionality for creating and validating genome assembly and gene model identifiers. Here are some examples of how to use GAAN:
+
+## Create Genome Assembly Identifier
+```bash
+poetry run gaan create-assembly <tol_id> <sample_identifier> <consortium> <version> <subversion> --optional <optional>
 ```
 
-## Usage
-Creating a Genome Assembly Identifier
-To create a genome assembly identifier, use the following command:
+## Validate Genome Assembly Identifier
+```bash
+poetry run gaan validate-assembly <assembly_id>
+```
+
+## Create Gene Model Identifier
+```bash
+poetry run gaan create-gene-model <assembly_prefix> <entity> <id_number>
+```
+
+## Validate Gene Model Identifier
+```bash
+poetry run gaan validate-gene-model <gene_model_id>
+```
+
+Replace the placeholders <tol_id>, <sample_identifier>, <consortium>, <version>, <subversion>, <optional>, <assembly_id>, <assembly_prefix>, <entity>, <id_number>, and <gene_model_id> with your specific values.
+
+For more information and options, you can use the --help flag with any of the commands, for example:
 
 ```bash
-python gaan.py create-assembly <tol_id> <sample_identifier> <consortium> <version> <subversion> [--optional <optional>]
+poetry run gaan create-assembly --help
 ```
-### Example:
-
-```bash
-python gaan.py create-assembly TOL123 sample123 consortiumX 1 0 --optional abc
-```
-
-## Validating a Genome Assembly Identifier
-To validate a genome assembly identifier, use the following command:
-
-```bash
-python gaan.py validate-assembly <assembly_id>
-```
-
-### Example:
-
-```bash
-python gaan.py validate-assembly TOL123.sample123.consortiumX.1.0.abc.fasta
-```
-
-## Creating a Gene Model Identifier
-To create a gene model identifier, use the following command:
-
-```bash
-python gaan.py create-gene-model <assembly_prefix> <entity> <id_number>
-```
-
-### Example:
-
-```bash
-python gaan.py create-gene-model TOL123g000001 gene 123456
-```
-
-## Validating a Gene Model Identifier
-To validate a gene model identifier, use the following command:
-
-```bash
-python gaan.py validate-gene-model <gene_model_id>
-```
-
-### Example:
-
-```bash
-python gaan.py validate-gene-model TOL123g000001
-```
-
-## Command-Line Options
-create-assembly: Create a genome assembly identifier.
-validate-assembly: Validate a genome assembly identifier.
-create-gene-model: Create a gene model identifier.
-validate-gene-model: Validate a gene model identifier.
 
 ### Examples
 For more examples, refer to the usage section above.
