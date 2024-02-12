@@ -93,7 +93,7 @@ def main():
 
     args = parser.parse_args()
 
-    if args.command == 'create-assembly':
+    if args.command == 'create-assembly-name':
         assembly_id = create_assembly_identifier(
             args.tol_id,
             args.sample_identifier,
@@ -104,11 +104,11 @@ def main():
         )
         print(f"Generated Assembly Identifier: {assembly_id}")
 
-    elif args.command == 'validate-assembly':
+    elif args.command == 'validate-assembly-name':
         is_valid = validate_assembly_identifier(args.assembly_id)
         print(f"Assembly Identifier Valid: {is_valid}")
 
-    elif args.command == 'create-gene-model':
+    elif args.command == 'create-gene-model-name':
         gene_model_id = create_gene_model_identifier(
             args.assembly_prefix,
             args.entity,
@@ -116,7 +116,7 @@ def main():
         )
         print(f"Generated Gene Model Identifier: {gene_model_id}")
 
-    elif args.command == 'validate-gene-model':
+    elif args.command == 'validate-gene-model-name':
         is_valid = validate_gene_model_identifier(args.gene_model_id)
         print(f"Gene Model Identifier Valid: {is_valid}")
 
