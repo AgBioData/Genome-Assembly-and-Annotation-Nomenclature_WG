@@ -1,26 +1,30 @@
 import argparse
 import re
 
+from typing import Optional
+
 # Constants
-MAX_ID_NUMBER = 999999
+MAX_ID_NUMBER: int = 999999
 
 # This pattern matches a valid genome assembly identifier as per the given guideline
-VALID_ASSEMBLY_REGEX = re.compile(
+VALID_ASSEMBLY_REGEX: re.Pattern = re.compile(
     r'^([A-Za-z0-9]+)\.([A-Za-z0-9]+)\.([A-Za-z0-9]+)\.(\d+)\.(\d+)(\.([A-Za-z0-9]+))?\.fasta$'
 )
 
 # This pattern matches a valid gene model identifier as per the given guideline
-VALID_GENE_MODEL_REGEX = re.compile(
+VALID_GENE_MODEL_REGEX: re.Pattern = re.compile(
     r'^([A-Za-z0-9]+)(g|p|pan|t)(\d{6})$'
 )
 
 # Assembly identifier template
-ASSEMBLY_ID_TEMPLATE = "{tol_id}.{sample_identifier}.{consortium}.{version}.{subversion}{optional}.fasta"
+ASSEMBLY_ID_TEMPLATE: str = "{tol_id}.{sample_identifier}.{consortium}.{version}.{subversion}{optional}.fasta"
 
 # Gene model identifier template
-GENE_MODEL_ID_TEMPLATE = "{assembly_prefix}{entity}{id_number}"
+GENE_MODEL_ID_TEMPLATE: str = "{assembly_prefix}{entity}{id_number}"
 
-def create_assembly_identifier(tol_id, sample_identifier, consortium, version, subversion, optional=''):
+
+def create_assembly_identifier(tol_id: str, sample_identifier: str, consortium: str, version: int,
+                               subversion: int, optional: Optional[str] = '') -> str:
     """Construct a valid assembly identifier based on the provided components."""
     # Ensure version and subversion are numbers
     version = int(version)
@@ -35,11 +39,13 @@ def create_assembly_identifier(tol_id, sample_identifier, consortium, version, s
         optional=f".{optional}" if optional else ""
     )
 
-def validate_assembly_identifier(assembly_id):
+
+def validate_assembly_identifier(assembly_id: str) -> bool:
     """Validate the given assembly identifier against the pattern."""
     return bool(VALID_ASSEMBLY_REGEX.match(assembly_id))
 
-def create_gene_model_identifier(assembly_prefix, entity, id_number):
+
+def create_gene_model_identifier(assembly_prefix: str, entity: str, id_number: int) -> str:
     """Construct a valid gene model identifier based on the provided components."""
     # Ensure id_number is an integer and within range
     id_number = int(id_number)
@@ -52,9 +58,11 @@ def create_gene_model_identifier(assembly_prefix, entity, id_number):
         id_number=str(id_number).zfill(6)  # Fill with zeros to ensure 6 digits
     )
 
-def validate_gene_model_identifier(gene_model_id):
+
+def validate_gene_model_identifier(gene_model_id: str) -> bool:
     """Validate the given gene model identifier against the pattern."""
     return bool(VALID_GENE_MODEL_REGEX.match(gene_model_id))
+
 
 def main():
     parser = argparse.ArgumentParser(description="Genome Assembly and Gene Model Identifier Tool")
@@ -114,6 +122,7 @@ def main():
 
     else:
         parser.print_help()
+
 
 if __name__ == "__main__":
     main()
