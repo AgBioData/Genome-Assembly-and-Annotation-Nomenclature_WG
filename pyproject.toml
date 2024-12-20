@@ -1,3 +1,19 @@
+[tool.poetry]
+name = "gaan"
+version = "1.0.0"
+description = "Genome Assembly and Annotation Nomenclature tool"
+authors = ["Adam Wright <awright@oicr.on.ca>"]
+packages = [
+    { include = "gaan", from = "src" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+argparse = "*"
+
 [build-system]
-requires = ["argparse"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+gaan = "gaan.gaan:main"
