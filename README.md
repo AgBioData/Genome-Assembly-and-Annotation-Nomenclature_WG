@@ -47,6 +47,8 @@ poetry run gaan create-gene-model <assembly_prefix> <entity> <id_number>
 
 ### Validate Gene Model Identifier
 
+***Note: Currently the validator will not check enitity, id number and the optional transcript in the gene model***
+
 ```bash
 poetry run gaan validate-gene-model <gene_model_id>
 ```
